@@ -14,8 +14,31 @@ jobs:
       - run:
           command: ./manage.py test
           name: Test
+  deploy-client-one:
+    execute: python/default
+    steps:
+      - checkout 
+      - python/local-cache
+      - python/install-deps
+      - python/save-cache
+      - run:
+          command: ./manage.py test
+          name: Build
+
+  deploy-client-two:
+    execute: python/default
+    steps:
+      - checkout 
+      - python/local-cache
+      - python/install-deps
+      - python/save-cache
+      - run:
+          command: ./manage.py test
+          name: Deploy
 
 workflows:
   main:
     jobs:
       - build-and-test
+      - deploy-client-two
+      - deploy-client-three
