@@ -14,17 +14,16 @@ jobs:
       - run:
           command: ./manage.py test
           name: Test
+
   deploy-and-launch:
     executor: python/default
     steps:
       - run:
-        command: ls
+          command: ls
        
 
 workflows:
   main:
     jobs:
       - build-and-test
-  deploy:
-    jobs:
       - deploy-and-launch
