@@ -20,6 +20,18 @@ jobs:
     steps:
       - run:
           command: ls
+
+  client-one-job:
+    executor: python/default
+    steps: 
+      - run:
+          command: ls 
+
+  client-two-job:
+    executor: python/default
+    steps:
+      - run:
+          command: ls 
        
 
 workflows:
@@ -27,3 +39,7 @@ workflows:
     jobs:
       - build-and-test
       - deploy-and-launch
+  second:
+    jobs:
+      - client-one-job
+      - client-two-job
